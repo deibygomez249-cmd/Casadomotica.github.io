@@ -1,0 +1,52 @@
+<div class="card shadow">
+  <div class="card-header bg-primary text-white">
+    <h3 class="mb-0">👥 Usuarios</h3>
+  </div>
+  <div class="card-body">
+    
+    <div class="d-flex justify-content-end gap-2 mb-3">
+      <button (click)="cargar()" class="btn btn-secondary" [disabled]="cargando">
+        🔄 {{ cargando ? 'Cargando...' : 'Recargar' }}
+      </button>
+      <a routerLink="/usuarios/nuevo" class="btn btn-success">➕ Nuevo Usuario</a>
+    </div>
+
+    <div *ngIf="cargando" class="text-center text-muted py-4">
+      <div class="spinner-border text-primary" role="status">
+        <span class="visually-hidden">Cargando...</span>
+      </div>
+      <p class="mt-2">Cargando usuarios...</p>
+    </div>
+
+    <div *ngIf="!cargando" class="table-responsive">
+      <table class="table table-hover align-middle">
+        <thead class="table-light">
+          <tr>
+            <th>ID</th>
+            <th>Nombre Completo</th>
+            <th>Email</th>
+            <th>Teléfono</th>
+            <th>Rol</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of items">
+            <td>{{ item.id }}</td>
+            <td>{{ item.nombreCompleto }}</td>
+            <td>{{ item.email }}</td>
+            <td>{{ item.telefono || '-' }}</td>
+            <td>{{ item.idTipoUsuario }}</td>
+            <td>
+              <a [routerLink]="['/usuarios/editar', item.id]" class="btn btn-sm btn-primary me-1">✏️ Editar</a>
+              <button (click)="eliminar(item.id)" class="btn btn-sm btn-danger">🗑️ Eliminar</button>
+            </td>
+          </tr>
+          <tr *ngIf="items.length === 0">
+            <td colspan="6" class="text-center text-muted">No hay usuarios registrados</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

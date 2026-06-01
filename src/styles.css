@@ -1,1 +1,19 @@
-/* You can add global styles to this file, and also import other style files */
+body {
+  background-color: #f4f7fc;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.card {
+  border-radius: 1rem;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.05);
+}
+
+.table thead th {
+  background-color: #0d6efd;
+  color: white;
+  border-bottom: none;
+}
+
+.btn-sm {
+  border-radius: 0.5rem;
+}

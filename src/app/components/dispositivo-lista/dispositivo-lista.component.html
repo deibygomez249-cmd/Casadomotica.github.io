@@ -1,0 +1,17 @@
+<div class="card shadow">
+  <div class="card-header bg-primary text-white"><h3 class="mb-0">💡 Dispositivos</h3></div>
+  <div class="card-body">
+    <div class="text-end mb-3"><a routerLink="/dispositivos/nuevo" class="btn btn-success">➕ Nuevo Dispositivo</a></div>
+    <table class="table table-hover">
+      <thead><tr><th>ID</th><th>Nombre</th><th>Tipo</th><th>Marca</th><th>Estado</th><th>Acciones</th></tr></thead>
+      <tbody>
+        <tr *ngFor="let d of items"><td>{{ d.id }}</td><td>{{ d.nombre }}</td><td>{{ d.tipoDispositivo }}</td>
+          <td>{{ d.marca }}</td><td>{{ d.estado ? '✅ Encendido' : '❌ Apagado' }}</td>
+          <td><a [routerLink]="['/dispositivos/editar', d.id]" class="btn btn-sm btn-primary me-1">✏️</a>
+            <button (click)="eliminar(d.id!)" class="btn btn-sm btn-danger">🗑️</button></td>
+        </tr>
+        <tr *ngIf="items.length === 0"><td colspan="6">No hay dispositivos</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>

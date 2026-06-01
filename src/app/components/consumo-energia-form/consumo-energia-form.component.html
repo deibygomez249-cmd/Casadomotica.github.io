@@ -1,0 +1,14 @@
+<div class="card shadow">
+  <div class="card-header bg-primary text-white"><h3 class="mb-0">{{ id ? '✏️ Editar' : '➕ Nuevo' }} Consumo Energía</h3></div>
+  <div class="card-body">
+    <div class="row">
+      <div class="col-md-6 mb-3"><label>Fecha/Hora Inicio</label><input [(ngModel)]="model.fechaHoraInicio" type="datetime-local" class="form-control" /></div>
+      <div class="col-md-6 mb-3"><label>Fecha/Hora Fin</label><input [(ngModel)]="model.fechaHoraFin" type="datetime-local" class="form-control" /></div>
+      <div class="col-md-6 mb-3"><label>Consumo (kWh)</label><input [(ngModel)]="model.consumoKWh" type="number" step="0.01" class="form-control" /></div>
+      <div class="col-md-6 mb-3"><label>Costo Estimado</label><input [(ngModel)]="model.costoEstimado" type="number" step="0.01" class="form-control" /></div>
+      <div class="col-md-6 mb-3"><label>ID Dispositivo</label><input [(ngModel)]="model.idDispositivo" type="number" class="form-control" /></div>
+    </div>
+    <div class="d-flex gap-2"><button (click)="guardar()" class="btn btn-primary">💾 Guardar</button>
+      <button (click)="router.navigate(['/consumos-energia'])" class="btn btn-secondary">❌ Cancelar</button></div>
+  </div>
+</div>

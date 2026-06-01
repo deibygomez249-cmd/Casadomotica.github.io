@@ -1,0 +1,12 @@
+<div class="card shadow mt-4" style="max-width: 600px; margin: 0 auto;">
+  <div class="card-header bg-primary text-white"><h3 class="mb-0">{{ id ? '✏️ Editar' : '➕ Nueva' }} Casa</h3></div>
+  <div class="card-body">
+    <div class="mb-3"><label class="form-label">Dirección</label><input [(ngModel)]="model.direccion" class="form-control" placeholder="Ej: Calle 10 # 5-20" /></div>
+    <div class="mb-3"><label class="form-label">Ciudad</label><input [(ngModel)]="model.ciudad" class="form-control" placeholder="Ej: Chía" /></div>
+    <div class="mb-3"><label class="form-label">ID Usuario Propietario</label><input type="number" [(ngModel)]="model.idUsuario" class="form-control" /></div>
+    <div class="d-flex gap-2">
+      <button (click)="guardar()" class="btn btn-primary">💾 Guardar</button>
+      <button (click)="router.navigate(['/casas'])" class="btn btn-secondary">❌ Cancelar</button>
+    </div>
+  </div>
+</div>

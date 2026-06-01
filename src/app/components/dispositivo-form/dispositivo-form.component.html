@@ -1,0 +1,16 @@
+<div class="card shadow">
+  <div class="card-header bg-primary text-white"><h3>{{ id ? '✏️ Editar' : '➕ Nuevo' }} Dispositivo</h3></div>
+  <div class="card-body">
+    <div class="row">
+      <div class="col-md-6 mb-3"><label>Nombre</label><input [(ngModel)]="model.nombre" class="form-control" /></div>
+      <div class="col-md-6 mb-3"><label>Tipo</label><input [(ngModel)]="model.tipoDispositivo" class="form-control" /></div>
+      <div class="col-md-6 mb-3"><label>Marca</label><input [(ngModel)]="model.marca" class="form-control" /></div>
+      <div class="col-md-6 mb-3"><label>Modelo</label><input [(ngModel)]="model.modelo" class="form-control" /></div>
+      <div class="col-md-6 mb-3"><label>Estado</label><select [(ngModel)]="model.estado" class="form-control"><option [value]="true">Encendido</option><option [value]="false">Apagado</option></select></div>
+      <div class="col-md-6 mb-3"><label>Consumo (Watts)</label><input [(ngModel)]="model.consumoWatts" type="number" class="form-control" /></div>
+      <div class="col-md-6 mb-3"><label>ID Habitación</label><input [(ngModel)]="model.idHabitacion" type="number" class="form-control" /></div>
+    </div>
+    <div class="d-flex gap-2"><button (click)="guardar()" class="btn btn-primary">💾 Guardar</button>
+      <button (click)="router.navigate(['/dispositivos'])" class="btn btn-secondary">❌ Cancelar</button></div>
+  </div>
+</div>
