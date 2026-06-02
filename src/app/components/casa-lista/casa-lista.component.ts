@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { CasaService } from '../../services/casa.service';
@@ -11,9 +11,11 @@ import { CasaService } from '../../services/casa.service';
 })
 export class CasaListaComponent implements OnInit {
   items: any[] = [];
-  cargando: boolean = false;
 
-  constructor(private service: CasaService) {}
+  constructor(
+    private service: CasaService,
+    private cdr: ChangeDetectorRef  // ← Agregado
+  ) {}
 
   ngOnInit(): void {
     console.log('🚀 ngOnInit ejecutado');
@@ -22,21 +24,14 @@ export class CasaListaComponent implements OnInit {
 
   cargar(): void {
     console.log('🔄 Ejecutando cargar()...');
-    this.cargando = true;
-    
     this.service.getAll().subscribe({
       next: (data) => {
-        console.log('✅ Datos recibidos:', data);
-        console.log('📊 Cantidad de registros:', data.length);
+        console.log('✅ Datos recibidos:', data.length);
         this.items = data;
-        this.cargando = false;
+        this.cdr.detectChanges();  // ← Forzar actualización de la vista
       },
       error: (err) => {
-        console.error('❌ ERROR al cargar datos:');
-        console.error('Status:', err.status);
-        console.error('Mensaje:', err.message);
-        console.error('URL:', err.url);
-        this.cargando = false;
+        console.error('❌ ERROR al cargar datos:', err);
       }
     });
   }

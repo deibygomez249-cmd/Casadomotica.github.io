@@ -1,7 +1,10 @@
 {
   "buildCommand": "ng build --configuration production",
   "outputDirectory": "dist/frontend-casa-domotica/browser",
-  "devCommand": "ng serve",
-  "installCommand": "npm install",
-  "framework": "angular"
+  "rewrites": [
+    {
+      "source": "/api/(.*)",
+      "destination": "http://www.casa-domotica.somee.com/api/$1"
+    }
+  ]
 }

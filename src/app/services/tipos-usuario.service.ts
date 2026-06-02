@@ -5,7 +5,7 @@ import { TiposUsuario } from '../models/tipos-usuario.model';
 
 @Injectable({ providedIn: 'root' })
 export class TiposUsuarioService {
-  private apiUrl = 'http://www.casa-domotica.somee.com/api/TiposUsuarios';
+  private apiUrl = 'api/TiposUsuarios';
 
   constructor(private http: HttpClient) {}
 

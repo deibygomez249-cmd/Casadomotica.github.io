@@ -5,7 +5,7 @@ import { Sensor } from '../models/sensor.model';
 
 @Injectable({ providedIn: 'root' })
 export class SensorService {
-  private apiUrl = 'http://www.casa-domotica.somee.com/api/Sensores';
+  private apiUrl = 'api/Sensores';
 
   constructor(private http: HttpClient) {}
 

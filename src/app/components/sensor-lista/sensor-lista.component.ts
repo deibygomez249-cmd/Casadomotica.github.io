@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { SensorService } from '../../services/sensor.service';
@@ -12,8 +12,29 @@ import { Sensor } from '../../models/sensor.model';
 })
 export class SensorListaComponent implements OnInit {
   items: Sensor[] = [];
-  constructor(private service: SensorService) {}
-  ngOnInit(): void { this.cargar(); }
-  cargar(): void { this.service.getAll().subscribe(data => this.items = data); }
-  eliminar(id: number): void { if (confirm('¿Eliminar sensor?')) this.service.delete(id).subscribe(() => this.cargar()); }
+
+  constructor(
+    private service: SensorService,
+    private cdr: ChangeDetectorRef  // ← Agregado
+  ) {}
+
+  ngOnInit(): void { 
+    this.cargar(); 
+  }
+
+  cargar(): void { 
+    this.service.getAll().subscribe({
+      next: (data) => {
+        this.items = data;
+        this.cdr.detectChanges();  // ← Forzar actualización de la vista
+      },
+      error: (err) => console.error('Error:', err)
+    });
+  }
+
+  eliminar(id: number): void { 
+    if (confirm('¿Eliminar sensor?')) {
+      this.service.delete(id).subscribe(() => this.cargar());
+    }
+  }
 }

@@ -1,17 +1,42 @@
 <div class="card shadow">
-  <div class="card-header bg-primary text-white"><h3 class="mb-0">💡 Dispositivos</h3></div>
+  <div class="card-header bg-primary text-white">
+    <h3 class="mb-0">💡 Dispositivos</h3>
+  </div>
   <div class="card-body">
-    <div class="text-end mb-3"><a routerLink="/dispositivos/nuevo" class="btn btn-success">➕ Nuevo Dispositivo</a></div>
-    <table class="table table-hover">
-      <thead><tr><th>ID</th><th>Nombre</th><th>Tipo</th><th>Marca</th><th>Estado</th><th>Acciones</th></tr></thead>
-      <tbody>
-        <tr *ngFor="let d of items"><td>{{ d.id }}</td><td>{{ d.nombre }}</td><td>{{ d.tipoDispositivo }}</td>
-          <td>{{ d.marca }}</td><td>{{ d.estado ? '✅ Encendido' : '❌ Apagado' }}</td>
-          <td><a [routerLink]="['/dispositivos/editar', d.id]" class="btn btn-sm btn-primary me-1">✏️</a>
-            <button (click)="eliminar(d.id!)" class="btn btn-sm btn-danger">🗑️</button></td>
-        </tr>
-        <tr *ngIf="items.length === 0"><td colspan="6">No hay dispositivos</td></tr>
-      </tbody>
-    </table>
+    
+    <div class="d-flex justify-content-end mb-3">
+      <a routerLink="/dispositivos/nuevo" class="btn btn-success">➕ Nuevo Dispositivo</a>
+    </div>
+
+    <div class="table-responsive">
+      <table class="table table-hover align-middle">
+        <thead class="table-light">
+          <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Tipo</th>
+            <th>Marca</th>
+            <th>Estado</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of items">
+            <td>{{ item.id }}</td>
+            <td>{{ item.nombre }}</td>
+            <td>{{ item.tipoDispositivo }}</td>
+            <td>{{ item.marca }}</td>
+            <td>{{ item.estado ? '✅ Encendido' : '❌ Apagado' }}</td>
+            <td>
+              <a [routerLink]="['/dispositivos/editar', item.id]" class="btn btn-sm btn-primary me-1">✏️ Editar</a>
+              <button (click)="eliminar(item.id!)" class="btn btn-sm btn-danger">🗑️ Eliminar</button>
+            </td>
+          </tr>
+          <tr *ngIf="items.length === 0">
+            <td colspan="6" class="text-center text-muted">No hay dispositivos registrados</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 </div>

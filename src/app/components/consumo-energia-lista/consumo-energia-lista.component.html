@@ -1,26 +1,42 @@
 <div class="card shadow">
-  <div class="card-header bg-primary text-white"><h3 class="mb-0">⚡ Consumos de Energía</h3></div>
+  <div class="card-header bg-primary text-white">
+    <h3 class="mb-0">⚡ Consumos de Energía</h3>
+  </div>
   <div class="card-body">
-    <div class="text-end mb-3"><a routerLink="/consumos-energia/nuevo" class="btn btn-success">➕ Nuevo Consumo</a></div>
+    
+    <div class="d-flex justify-content-end mb-3">
+      <a routerLink="/consumos-energia/nuevo" class="btn btn-success">➕ Nuevo Consumo</a>
+    </div>
+
     <div class="table-responsive">
-      <table class="table table-hover">
-        <thead>
-          <tr><th>ID</th><th>Dispositivo</th><th>Inicio</th><th>Fin</th><th>Consumo (kWh)</th><th>Costo</th><th>Acciones</th></tr>
+      <table class="table table-hover align-middle">
+        <thead class="table-light">
+          <tr>
+            <th>ID</th>
+            <th>Dispositivo</th>
+            <th>Inicio</th>
+            <th>Fin</th>
+            <th>Consumo (kWh)</th>
+            <th>Costo</th>
+            <th>Acciones</th>
+          </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let c of items">
-            <td>{{ c.id }}</td>
-            <td>{{ c.idDispositivo }}</td>
-            <td>{{ c.fechaHoraInicio | date:'short' }}</td>
-            <td>{{ c.fechaHoraFin | date:'short' }}</td>
-            <td>{{ c.consumoKWh }}</td>
-            <td>{{ c.costoEstimado | currency }}</td>
+          <tr *ngFor="let item of items">
+            <td>{{ item.id }}</td>
+            <td>{{ item.idDispositivo }}</td>
+            <td>{{ item.fechaHoraInicio | date:'short' }}</td>
+            <td>{{ item.fechaHoraFin | date:'short' }}</td>
+            <td>{{ item.consumoKWh }}</td>
+            <td>{{ item.costoEstimado | currency }}</td>
             <td>
-              <a [routerLink]="['/consumos-energia/editar', c.id]" class="btn btn-sm btn-primary me-1">✏️</a>
-              <button (click)="eliminar(c.id!)" class="btn btn-sm btn-danger">🗑️</button>
+              <a [routerLink]="['/consumos-energia/editar', item.id]" class="btn btn-sm btn-primary me-1">✏️ Editar</a>
+              <button (click)="eliminar(item.id!)" class="btn btn-sm btn-danger">🗑️ Eliminar</button>
             </td>
           </tr>
-          <tr *ngIf="items.length === 0"><td colspan="7">No hay consumos registrados</td></tr>
+          <tr *ngIf="items.length === 0">
+            <td colspan="7" class="text-center text-muted">No hay consumos registrados</td>
+          </tr>
         </tbody>
       </table>
     </div>

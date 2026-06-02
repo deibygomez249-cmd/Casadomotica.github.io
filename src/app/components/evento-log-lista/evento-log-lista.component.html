@@ -1,18 +1,35 @@
 <div class="card shadow">
-  <div class="card-header bg-primary text-white"><h3 class="mb-0">📋 Eventos / Logs</h3></div>
+  <div class="card-header bg-primary text-white">
+    <h3 class="mb-0">📋 Eventos / Logs</h3>
+  </div>
   <div class="card-body">
+    
     <div class="table-responsive">
-      <table class="table table-hover">
-        <thead>
-          <tr><th>ID</th><th>Tipo</th><th>Descripción</th><th>Fecha</th><th>Gravedad</th><th>Usuario</th><th>Dispositivo</th></tr>
+      <table class="table table-hover align-middle">
+        <thead class="table-light">
+          <tr>
+            <th>ID</th>
+            <th>Tipo</th>
+            <th>Descripción</th>
+            <th>Fecha</th>
+            <th>Gravedad</th>
+            <th>Usuario</th>
+            <th>Dispositivo</th>
+          </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let e of items">
-            <td>{{ e.id }}</td><td>{{ e.tipoEvento }}</td><td>{{ e.descripcion }}</td>
-            <td>{{ e.fechaEvento | date:'short' }}</td><td>{{ e.nivelGravedad }}</td>
-            <td>{{ e.idUsuario || '-' }}</td><td>{{ e.idDispositivo || '-' }}</td>
+          <tr *ngFor="let item of items">
+            <td>{{ item.id }}</td>
+            <td>{{ item.tipoEvento }}</td>
+            <td>{{ item.descripcion }}</td>
+            <td>{{ item.fechaEvento | date:'short' }}</td>
+            <td>{{ item.nivelGravedad }}</td>
+            <td>{{ item.idUsuario || '-' }}</td>
+            <td>{{ item.idDispositivo || '-' }}</td>
           </tr>
-          <tr *ngIf="items.length === 0"><td colspan="7">No hay eventos registrados</td></tr>
+          <tr *ngIf="items.length === 0">
+            <td colspan="7" class="text-center text-muted">No hay eventos registrados</td>
+          </tr>
         </tbody>
       </table>
     </div>

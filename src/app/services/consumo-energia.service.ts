@@ -5,7 +5,7 @@ import { ConsumoEnergia } from '../models/consumo-energia.model';
 
 @Injectable({ providedIn: 'root' })
 export class ConsumoEnergiaService {
-  private apiUrl = 'http://www.casa-domotica.somee.com/api/ConsumosEnergia';
+  private apiUrl = 'api/ConsumosEnergia';
 
   constructor(private http: HttpClient) {}
 

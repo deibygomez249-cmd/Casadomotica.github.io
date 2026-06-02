@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { TiposUsuarioService } from '../../services/tipos-usuario.service';
@@ -11,9 +11,11 @@ import { TiposUsuarioService } from '../../services/tipos-usuario.service';
 })
 export class TiposUsuarioListaComponent implements OnInit {
   items: any[] = [];
-  cargando: boolean = false;
 
-  constructor(private service: TiposUsuarioService) {}
+  constructor(
+    private service: TiposUsuarioService,
+    private cdr: ChangeDetectorRef  // ← Para forzar actualización de la vista
+  ) {}
 
   ngOnInit(): void {
     console.log('🚀 TiposUsuario - ngOnInit ejecutado');
@@ -22,20 +24,14 @@ export class TiposUsuarioListaComponent implements OnInit {
 
   cargar(): void {
     console.log('🔄 TiposUsuario - Ejecutando cargar()...');
-    this.cargando = true;
-    
     this.service.getAll().subscribe({
       next: (data) => {
-        console.log('✅ TiposUsuario - Datos recibidos:', data);
-        console.log('📊 Cantidad de registros:', data.length);
+        console.log('✅ TiposUsuario - Datos recibidos:', data.length);
         this.items = data;
-        this.cargando = false;
+        this.cdr.detectChanges();  // ← Forzar actualización
       },
       error: (err) => {
-        console.error('❌ ERROR al cargar tipos de usuario:');
-        console.error('Status:', err.status);
-        console.error('Mensaje:', err.message);
-        this.cargando = false;
+        console.error('❌ ERROR al cargar tipos de usuario:', err);
       }
     });
   }

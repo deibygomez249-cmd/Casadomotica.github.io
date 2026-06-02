@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { UsuarioService } from '../../services/usuario.service';
@@ -11,33 +11,28 @@ import { UsuarioService } from '../../services/usuario.service';
 })
 export class UsuarioListaComponent implements OnInit {
   items: any[] = [];
-  cargando: boolean = false;
 
-  constructor(private service: UsuarioService) {}
+  constructor(
+    private service: UsuarioService,
+    private cdr: ChangeDetectorRef  // ← Agregar esto
+  ) {}
 
   ngOnInit(): void {
     console.log('🚀 Usuarios - ngOnInit ejecutado');
-    setTimeout(() => {
-      this.cargar();
-    }, 500);
+    this.cargar();
   }
 
   cargar(): void {
     console.log('🔄 Usuarios - Ejecutando cargar()...');
-    this.cargando = true;
-    
     this.service.getAll().subscribe({
       next: (data) => {
-        console.log('✅ Usuarios - Datos recibidos:', data);
-        console.log('📊 Cantidad de registros:', data.length);
+        console.log('✅ Usuarios - Datos recibidos:', data.length);
         this.items = data;
-        this.cargando = false;
+        this.cdr.detectChanges();  // ← Forzar actualización de la vista
+        console.log('📊 Vista actualizada, items:', this.items.length);
       },
       error: (err) => {
-        console.error('❌ ERROR al cargar usuarios:');
-        console.error('Status:', err.status);
-        console.error('Mensaje:', err.message);
-        this.cargando = false;
+        console.error('❌ ERROR:', err);
       }
     });
   }

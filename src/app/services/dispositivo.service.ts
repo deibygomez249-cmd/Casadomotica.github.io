@@ -5,7 +5,7 @@ import { Dispositivo } from '../models/dispositivo.model';
 
 @Injectable({ providedIn: 'root' })
 export class DispositivoService {
-  private apiUrl = 'http://www.casa-domotica.somee.com/api/Dispositivos';
+  private apiUrl = 'api/Dispositivos';
 
   constructor(private http: HttpClient) {}
 

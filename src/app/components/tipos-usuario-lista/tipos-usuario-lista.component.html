@@ -4,24 +4,13 @@
   </div>
   <div class="card-body">
     
-    <!-- Botones de acción -->
-    <div class="d-flex justify-content-end gap-2 mb-3">
-      <button (click)="cargar()" class="btn btn-secondary" [disabled]="cargando">
-        🔄 {{ cargando ? 'Cargando...' : 'Recargar' }}
-      </button>
+    <!-- Solo botón nuevo tipo -->
+    <div class="d-flex justify-content-end mb-3">
       <a routerLink="/tipos-usuario/nuevo" class="btn btn-success">➕ Nuevo Tipo</a>
     </div>
 
-    <!-- Indicador de carga -->
-    <div *ngIf="cargando" class="text-center text-muted py-4">
-      <div class="spinner-border text-primary" role="status">
-        <span class="visually-hidden">Cargando...</span>
-      </div>
-      <p class="mt-2">Cargando tipos de usuario...</p>
-    </div>
-
     <!-- Tabla de datos -->
-    <div *ngIf="!cargando" class="table-responsive">
+    <div class="table-responsive">
       <table class="table table-hover align-middle">
         <thead class="table-light">
           <tr>
@@ -35,18 +24,12 @@
             <td>{{ item.id }}</td>
             <td>{{ item.tipoUsuario }}</td>
             <td>
-              <a [routerLink]="['/tipos-usuario/editar', item.id]" class="btn btn-sm btn-primary me-1">
-                ✏️ Editar
-              </a>
-              <button (click)="eliminar(item.id)" class="btn btn-sm btn-danger">
-                🗑️ Eliminar
-              </button>
+              <a [routerLink]="['/tipos-usuario/editar', item.id]" class="btn btn-sm btn-primary me-1">✏️ Editar</a>
+              <button (click)="eliminar(item.id)" class="btn btn-sm btn-danger">🗑️ Eliminar</button>
             </td>
           </tr>
           <tr *ngIf="items.length === 0">
-            <td colspan="3" class="text-center text-muted">
-              No hay tipos de usuario registrados
-            </td>
+            <td colspan="3" class="text-center text-muted">No hay tipos de usuario registrados</td>
           </tr>
         </tbody>
       </table>

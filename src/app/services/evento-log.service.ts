@@ -5,7 +5,7 @@ import { EventoLog } from '../models/evento-log.model';
 
 @Injectable({ providedIn: 'root' })
 export class EventoLogService {
-  private apiUrl = 'http://www.casa-domotica.somee.com/api/EventosLogs';
+  private apiUrl = 'api/EventosLogs';
 
   constructor(private http: HttpClient) {}
 

@@ -5,7 +5,7 @@ import { LecturaSensor } from '../models/lectura-sensor.model';
 
 @Injectable({ providedIn: 'root' })
 export class LecturaSensorService {
-  private apiUrl = 'http://www.casa-domotica.somee.com/api/LecturasSensores';
+  private apiUrl = 'api/LecturasSensores';
 
   constructor(private http: HttpClient) {}
 

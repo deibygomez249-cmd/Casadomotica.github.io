@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { EventoLogService } from '../../services/evento-log.service';
 import { EventoLog } from '../../models/evento-log.model';
@@ -11,7 +11,23 @@ import { EventoLog } from '../../models/evento-log.model';
 })
 export class EventoLogListaComponent implements OnInit {
   items: EventoLog[] = [];
-  constructor(private service: EventoLogService) {}
-  ngOnInit(): void { this.cargar(); }
-  cargar(): void { this.service.getAll().subscribe(data => this.items = data); }
+
+  constructor(
+    private service: EventoLogService,
+    private cdr: ChangeDetectorRef  // ← Agregado
+  ) {}
+
+  ngOnInit(): void { 
+    this.cargar(); 
+  }
+
+  cargar(): void { 
+    this.service.getAll().subscribe({
+      next: (data) => {
+        this.items = data;
+        this.cdr.detectChanges();  // ← Forzar actualización de la vista
+      },
+      error: (err) => console.error('Error:', err)
+    });
+  }
 }

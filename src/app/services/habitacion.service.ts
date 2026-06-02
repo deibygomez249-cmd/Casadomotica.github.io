@@ -5,7 +5,7 @@ import { Habitacion } from '../models/habitacion.model';
 
 @Injectable({ providedIn: 'root' })
 export class HabitacionService {
-  private apiUrl = 'http://www.casa-domotica.somee.com/api/Habitaciones';
+  private apiUrl = 'api/Habitaciones';
 
   constructor(private http: HttpClient) {}
 

@@ -1,17 +1,40 @@
 <div class="card shadow">
-  <div class="card-header bg-primary text-white"><h3 class="mb-0">🌡️ Sensores</h3></div>
+  <div class="card-header bg-primary text-white">
+    <h3 class="mb-0">🌡️ Sensores</h3>
+  </div>
   <div class="card-body">
-    <div class="text-end mb-3"><a routerLink="/sensores/nuevo" class="btn btn-success">➕ Nuevo Sensor</a></div>
-    <table class="table table-hover">
-      <thead><tr><th>ID</th><th>Nombre</th><th>Tipo</th><th>Unidad</th><th>Acciones</th></tr></thead>
-      <tbody>
-        <tr *ngFor="let s of items"><td>{{ s.id }}</td><td>{{ s.nombre }}</td><td>{{ s.tipoSensor }}</td>
-          <td>{{ s.unidadMedida }}</td>
-          <td><a [routerLink]="['/sensores/editar', s.id]" class="btn btn-sm btn-primary me-1">✏️</a>
-            <button (click)="eliminar(s.id!)" class="btn btn-sm btn-danger">🗑️</button></td>
-        </tr>
-        <tr *ngIf="items.length === 0"><td colspan="5">No hay sensores</td></tr>
-      </tbody>
-    </table>
+    
+    <div class="d-flex justify-content-end mb-3">
+      <a routerLink="/sensores/nuevo" class="btn btn-success">➕ Nuevo Sensor</a>
+    </div>
+
+    <div class="table-responsive">
+      <table class="table table-hover align-middle">
+        <thead class="table-light">
+          <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Tipo</th>
+            <th>Unidad</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of items">
+            <td>{{ item.id }}</td>
+            <td>{{ item.nombre }}</td>
+            <td>{{ item.tipoSensor }}</td>
+            <td>{{ item.unidadMedida }}</td>
+            <td>
+              <a [routerLink]="['/sensores/editar', item.id]" class="btn btn-sm btn-primary me-1">✏️ Editar</a>
+              <button (click)="eliminar(item.id!)" class="btn btn-sm btn-danger">🗑️ Eliminar</button>
+            </td>
+          </tr>
+          <tr *ngIf="items.length === 0">
+            <td colspan="5" class="text-center text-muted">No hay sensores registrados</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 </div>
